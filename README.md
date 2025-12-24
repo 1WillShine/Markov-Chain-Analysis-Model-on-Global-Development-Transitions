@@ -21,3 +21,6 @@ This project analyzes how countries move between development stages over time us
 
 ## Tools
 Python, pandas, NumPy, Plotly
+
+## Project schema
+7 projected columns from World bank development dataset will be used the perform Markov chain analysis calculation to the most accurate level with visualization to come after 
