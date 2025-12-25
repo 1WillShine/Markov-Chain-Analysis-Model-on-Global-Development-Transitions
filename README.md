@@ -1,26 +1,64 @@
-# Modeling Global Development Transitions
+# Global Development Dynamics via Markov Chains
 
-This project analyzes how countries move between development stages over time using official World Bank income classifications. By modeling country-level transitions as a Markov process, the project estimates the likelihood of economic advancement, stagnation, or regression.
+## Overview
+This project models long-run development dynamics of countries using a probabilistic framework.
+Rather than relying on static development labels, I construct a composite development index and
+analyze how countries transition between development states over time using Markov chains.
 
-## Key Questions
-- How often do countries transition between income categories?
-- Which countries are most likely to escape low-income states?
-- What factors correlate with faster development transitions?
+## Data
+- Source: World Bank Open Data
+- Coverage: 200+ countries, multiple decades
+- Domains:
+  - Income & growth
+  - Health & education
+  - Inequality & poverty
+  - Inflation & macro stability
 
-## Data Sources
-- World Bank Income Classifications
-- World Bank Development Indicators
-- UN Human Development Index (HDI)
+## Feature Engineering
+Each country-year observation is categorized into five ordinal levels:
+Very Low → Very High
 
-## Methods
-- Panel data analysis
-- State-based modeling
-- Markov transition matrices
-- Monte Carlo simulation
-- Interactive Plotly visualizations
+Metrics used:
+- GNI (income)
+- GDP growth
+- Income inequality
+- Inflation (reverse coded)
+- Life expectancy
+- Poverty (reverse coded)
+- School enrollment parity
 
-## Tools
-Python, pandas, NumPy, Plotly
+Missing values are handled via income-conditioned median imputation.
 
-## Project schema
-7 projected columns from World bank development dataset will be used the perform Markov chain analysis calculation to the most accurate level with visualization to come after 
+## Composite Development Index
+Each metric is encoded numerically (0–4) and summed to produce a development score:
+- Min: 0
+- Max: 28
+
+States:
+- Least Developed
+- Developing
+- Emerging
+- Advanced
+
+## Markov Chain Modeling
+I estimate a transition probability matrix describing how countries move between
+development states across time.
+
+This allows analysis of:
+- Development traps
+- Upward mobility probabilities
+- Persistence and regression
+- Regional transition differences
+
+## Visualization & App
+An interactive Streamlit dashboard allows users to:
+- Explore global development patterns
+- Analyze individual countries
+- Visualize transition probabilities
+- Compare regions dynamically
+
+## How to Run
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app/app.py
+
