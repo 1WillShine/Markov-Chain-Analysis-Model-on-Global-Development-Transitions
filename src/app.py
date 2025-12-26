@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from markov import build_transition_matrix
-
+from data_loader import df_final
 st.set_page_config(page_title="Global Development Dynamics", layout="wide")
 
 @st.cache_data
 def load_data():
     return pd.read_csv("data/polished/final_polished_dataset.csv")
 
-df = load_data()
+df = df_final
 
 # Sidebar
 st.sidebar.title("Controls")
