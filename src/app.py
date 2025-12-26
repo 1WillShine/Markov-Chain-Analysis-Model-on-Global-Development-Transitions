@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from src.markov import build_transition_matrix
+from markov import build_transition_matrix
 
 st.set_page_config(page_title="Global Development Dynamics", layout="wide")
 
