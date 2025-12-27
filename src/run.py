@@ -31,7 +31,7 @@ with tab2:
     latest_row = country_df.sort_values("Year").iloc[-1]
 
     st.subheader(f"{country} — Development Profile")
-    st.metric("Development Stage", latest_row["dev_stage"])
+    st.metric("Development Stage", latest_row["dev_state"])
     st.plotly_chart(radar_chart(latest_row), use_container_width=True)
 
     metrics = [
@@ -65,7 +65,7 @@ with tab3:
 
     st.markdown("### Country-Specific Transition")
 
-    current = latest_row["dev_stage"]
+    current = latest_row["dev_state"]
     row = P.loc[current]
 
     prob_df = pd.DataFrame({
