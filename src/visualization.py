@@ -12,7 +12,7 @@ def choropleth(latest):
     fig = px.choropleth(
         latest,
         locations="Country Code",
-        color="dev_stage",
+        color="dev_state",
         hover_name="Country Name",
         color_discrete_map=STAGE_COLORS,
         projection="natural earth"
