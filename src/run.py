@@ -63,7 +63,7 @@ with tab3:
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("### Country-Specific Transition")
+    st.markdown("### Country-Specific Transition: "+country)
 
     current = latest_row["dev_state"]
     row = P.loc[current]
