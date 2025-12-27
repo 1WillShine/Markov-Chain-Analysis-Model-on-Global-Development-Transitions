@@ -5,7 +5,7 @@ def assign_dev_state(score):
         return "Least Developed"
     elif score <= 13:
         return "Developing"
-    elif score <= 20:
+    elif score <= 15:
         return "Emerging"
     else:
         return "Advanced"
