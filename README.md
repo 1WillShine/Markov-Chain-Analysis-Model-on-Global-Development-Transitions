@@ -1,5 +1,117 @@
 # Global Development Dynamics via Markov Chains
+🌍 Global Development Dynamics
+------------------------------
 
+**A Probabilistic Analysis of Country Development Trajectories**
+
+### 📌 Project Overview
+
+This project models global economic development as a **stochastic process**, combining socioeconomic indicators with **Markov chain dynamics** to analyze how countries transition between development stages over time.
+
+Unlike static rankings, this system estimates **future development probabilities**, enabling conditional, country-specific insights.
+
+### 🔍 Key Features
+
+*   Composite development index from World Bank data
+    
+*   Categorical quantile-based normalization
+    
+*   Country-level radar diagnostics
+    
+*   Global transition matrix (Markov chain)
+    
+*   Conditional future-state probabilities
+    
+*   Interactive Streamlit dashboard
+    
+
+### 📊 Indicators Used
+
+*   Income (GNI, Atlas)
+    
+*   GDP growth
+    
+*   Inequality (bottom 20% share)
+    
+*   Inflation (GDP deflator)
+    
+*   Life expectancy
+    
+*   Poverty rate ($3/day PPP)
+    
+*   School enrollment (GPI)
+    
+
+### 🧠 Methodology
+
+1.  Continuous indicators → quintile categories (0–4)
+    
+2.  Composite development score (sum)
+    
+3.  Mapping scores → development stages
+    
+4.  Year-over-year transitions → Markov chain
+    
+5.  Conditional probability inference
+    
+
+### 🔁 Markov Model Interpretation
+
+Each country is treated as occupying a discrete development state.Transition probabilities estimate how likely countries are to:
+
+*   Advance
+    
+*   Stagnate
+    
+*   Regress
+    
+
+This enables **probabilistic forecasting**, not deterministic ranking.
+
+### ⚠️ Model Assumptions
+
+*   Equal weighting of indicators
+    
+*   Markov property (memoryless transitions)
+    
+*   Stationary transition probabilities
+    
+*   Quantile-based normalization
+    
+*   Missing data imputed conditionally
+    
+
+### ❗ Limitations
+
+*   No causal inference
+    
+*   Policy shocks not modeled
+    
+*   Data availability varies by country
+    
+*   Development is multi-dimensional and nonlinear
+    
+
+### 🚀 Tech Stack
+
+*   Python, Pandas, NumPy
+    
+*   Plotly
+    
+*   Streamlit
+    
+*   World Bank Open Data
+    
+
+### 📈 Possible Extensions
+
+*   Metric-weighted scoring
+    
+*   Regional transition matrices
+    
+*   Bayesian updating
+    
+*   Policy simulation engine
 ## Overview
 This project models long-run development dynamics of countries using a probabilistic framework.
 Rather than relying on static development labels, I construct a composite development index and
