@@ -1,34 +1,24 @@
 import pandas as pd
 import numpy as np
+from data_loader import df_final
+df = df_final
+STAGES = ["Least Developed", "Developing", "Emerging", "Advanced"]
 
-STATES = ["Least Developed", "Developing", "Emerging", "Advanced"]
-
-
-def build_transition_matrix(df, country_col="Country Code", year_col="Year", state_col="dev_state"):
-    """
-    Builds a Markov transition matrix P(i -> j)
-    """
-
-    df_sorted = df.sort_values([country_col, year_col])
+def build_transition_matrix(df):
+    df = df.sort_values(["Country Code", "Year"])
+    df["stage"] = df["dev_score"].apply(dev_stage)
 
     transitions = []
 
-    for _, group in df_sorted.groupby(country_col):
-        states = group[state_col].values
-        for i in range(len(states) - 1):
-            if pd.notna(states[i]) and pd.notna(states[i + 1]):
-                transitions.append((states[i], states[i + 1]))
+    for country, g in df.groupby("Country Code"):
+        prev = g["stage"].shift(1)
+        curr = g["stage"]
+        mask = prev.notna()
+        transitions += list(zip(prev[mask], curr[mask]))
 
-    transition_df = pd.DataFrame(transitions, columns=["from", "to"])
+    T = pd.DataFrame(0, index=STAGES, columns=STAGES)
 
-    matrix = (
-        transition_df
-        .groupby(["from", "to"])
-        .size()
-        .unstack(fill_value=0)
-        .reindex(index=STATES, columns=STATES, fill_value=0)
-    )
+    for i, j in transitions:
+        T.loc[i, j] += 1
 
-    transition_matrix = matrix.div(matrix.sum(axis=1), axis=0)
-
-    return transition_matrix
+    return T.div(T.sum(axis=1), axis=0).fillna(0)
