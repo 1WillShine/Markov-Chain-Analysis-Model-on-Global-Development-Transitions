@@ -6,7 +6,7 @@ STAGES = ["Least Developed", "Developing", "Emerging", "Advanced"]
 
 def build_transition_matrix(df):
     df = df.sort_values(["Country Code", "Year"])
-    df["stage"] = df["dev_score"].apply(dev_stage)
+    #df["stage"] = df["dev_score"].apply(dev_stage)
 
     transitions = []
 
