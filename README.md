@@ -1,176 +1,49 @@
-# Global Development Dynamics via Markov Chains
-🌍 Global Development Dynamics
-------------------------------
+🌍 Global Development Dynamics via Markov Chains
+================================================
 
-**A Probabilistic Analysis of Country Development Trajectories**
+_A Probabilistic Analysis of Country Development Trajectories_
 
-### 📌 Project Overview
+Motivation
+----------
 
-This project models global economic development as a **stochastic process**, combining socioeconomic indicators with **Markov chain dynamics** to analyze how countries transition between development stages over time.
+Global development is often communicated through static rankings or categorical labels that obscure uncertainty and long-run dynamics. I was interested in whether probabilistic models—specifically Markov chains—could offer a more honest and informative way to understand how countries evolve across development stages over time. This project applies stochastic modeling to global socioeconomic data in order to study development mobility, persistence, and inequality without relying on deterministic predictions.
 
-Unlike static rankings, this system estimates **future development probabilities**, enabling conditional, country-specific insights.
+Project Overview
+----------------
 
-### 🔍 Key Features
+This project models global economic development as a discrete-state stochastic process. Rather than assigning countries fixed development labels, I construct a composite development index from World Bank indicators and estimate transition probabilities between development stages using a Markov chain framework. The result is a system that describes how countries tend to advance, stagnate, or regress probabilistically over time, and what the implied long-run global distribution of development looks like under current dynamics.
 
-*   Composite development index from World Bank data
-    
-*   Categorical quantile-based normalization
-    
-*   Country-level radar diagnostics
-    
-*   Global transition matrix (Markov chain)
-    
-*   Conditional future-state probabilities
-    
-*   Interactive Streamlit dashboard
-    
+Data
+----
 
-### 📊 Indicators Used
+The analysis uses World Bank Open Data covering over 200 countries across multiple decades. Indicators span income and growth, health and education, inequality and poverty, and macroeconomic stability. Missing values are handled using income-conditioned median imputation to preserve cross-country comparability while minimizing bias.
 
-*   Income (GNI, Atlas)
-    
-*   GDP growth
-    
-*   Inequality (bottom 20% share)
-    
-*   Inflation (GDP deflator)
-    
-*   Life expectancy
-    
-*   Poverty rate ($3/day PPP)
-    
-*   School enrollment (GPI)
-    
+Methodology
+-----------
 
-### 🧠 Methodology
+Each socioeconomic indicator is normalized into quintile-based ordinal categories to ensure comparability across countries and time. These encoded metrics are summed into a composite development score, which is then mapped into four ordered development states ranging from least developed to advanced. Year-over-year changes in state assignments are used to estimate a transition probability matrix under the Markov assumption that future states depend only on the current state. From this matrix, I compute conditional transition probabilities and the stationary distribution to analyze long-run system behavior.
 
-1.  Continuous indicators → quintile categories (0–4)
-    
-2.  Composite development score (sum)
-    
-3.  Mapping scores → development stages
-    
-4.  Year-over-year transitions → Markov chain
-    
-5.  Conditional probability inference
-    
+Model Interpretation
+--------------------
 
-### 🔁 Markov Model Interpretation
+The Markov chain does not predict individual country outcomes. Instead, it characterizes the structure of global development dynamics by quantifying persistence, upward mobility, and regression risk across states. The stationary distribution provides insight into long-run inequality and development traps implied by current transition patterns, while conditional probabilities allow country-level analysis without overclaiming predictive certainty.
 
-Each country is treated as occupying a discrete development state.Transition probabilities estimate how likely countries are to:
+Results & Insights
+------------------
 
-*   Advance
-    
-*   Stagnate
-    
-*   Regress
-    
+The model reveals strong persistence in development states and asymmetric mobility, with upward transitions occurring less frequently than stagnation. Certain states behave as near-absorbing, contributing to long-run inequality in the stationary distribution. Regional differences remain visible even in equilibrium, suggesting structural rather than transitory disparities. Overall, the project demonstrates how probabilistic models can describe macro social systems more responsibly than static rankings.
 
-This enables **probabilistic forecasting**, not deterministic ranking.
+Technical Stack
+---------------
 
-### ⚠️ Model Assumptions
+The project is implemented in Python using pandas and NumPy for data processing, Plotly for visualization, and Streamlit for interactive deployment. Transition matrices and stationary distributions are computed using standard linear algebra techniques.
 
-*   Equal weighting of indicators
-    
-*   Markov property (memoryless transitions)
-    
-*   Stationary transition probabilities
-    
-*   Quantile-based normalization
-    
-*   Missing data imputed conditionally
-    
+Limitations
+-----------
 
-### ❗ Limitations
+The model does not establish causality, incorporate policy shocks, or allow for time-varying transition dynamics. Equal weighting of indicators and the Markov assumption are simplifications made for interpretability rather than realism.
 
-*   No causal inference
-    
-*   Policy shocks not modeled
-    
-*   Data availability varies by country
-    
-*   Development is multi-dimensional and nonlinear
-    
+How to Run
+----------
 
-### 🚀 Tech Stack
-
-*   Python, Pandas, NumPy
-    
-*   Plotly
-    
-*   Streamlit
-    
-*   World Bank Open Data
-    
-
-### 📈 Possible Extensions
-
-*   Metric-weighted scoring
-    
-*   Regional transition matrices
-    
-*   Bayesian updating
-    
-*   Policy simulation engine
-## Overview
-This project models long-run development dynamics of countries using a probabilistic framework.
-Rather than relying on static development labels, I construct a composite development index and
-analyze how countries transition between development states over time using Markov chains.
-
-## Data
-- Source: World Bank Open Data
-- Coverage: 200+ countries, multiple decades
-- Domains:
-  - Income & growth
-  - Health & education
-  - Inequality & poverty
-  - Inflation & macro stability
-
-## Feature Engineering
-Each country-year observation is categorized into five ordinal levels:
-Very Low → Very High
-
-Metrics used:
-- GNI (income)
-- GDP growth
-- Income inequality
-- Inflation (reverse coded)
-- Life expectancy
-- Poverty (reverse coded)
-- School enrollment parity
-
-Missing values are handled via income-conditioned median imputation.
-
-## Composite Development Index
-Each metric is encoded numerically (0–4) and summed to produce a development score:
-- Min: 0
-- Max: 28
-
-States:
-- Least Developed
-- Developing
-- Emerging
-- Advanced
-
-## Markov Chain Modeling
-I estimate a transition probability matrix describing how countries move between
-development states across time.
-
-This allows analysis of:
-- Development traps
-- Upward mobility probabilities
-- Persistence and regression
-- Regional transition differences
-
-## Visualization & App
-An interactive Streamlit dashboard allows users to:
-- Explore global development patterns
-- Analyze individual countries
-- Visualize transition probabilities
-- Compare regions dynamically
-
-## How to Run
-```bash
-pip install -r requirements.txt
-streamlit run streamlit_app/app.py
-
+Install dependencies using pip install -r requirements.txt, then launch the dashboard with streamlit run streamlit\_app/app.py.
