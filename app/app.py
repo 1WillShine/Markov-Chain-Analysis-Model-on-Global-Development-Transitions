@@ -51,7 +51,7 @@ with tab2:
     st.markdown("### 🚨 Bottlenecks")
     st.dataframe(insight.head(2))
 
-    st.markdown("### 💪 Strengths")
+    st.markdown("### 💪 Strengths 💪")
     st.dataframe(insight.tail(2))
 
 # -------- TAB 3 --------
