@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from models.scoring import dev_stage
 
-STAGES = ["Least Developed", "Developing", "Emerging", "Advanced"]
+STAGES = ["Least Developed(D)", "Developing(C)", "Emerging(B)", "Advanced(A)"]
 
 def build_transition_matrix(df):
     df = df.sort_values(["Country Code", "Year"])
