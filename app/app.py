@@ -48,7 +48,7 @@ with tab2:
         "Score": latest_row[metrics]
     }).sort_values("Score")
 
-    st.markdown("### 🚨 Bottlenecks")
+    st.markdown("### 🚨 Bottlenecks 🚨")
     st.dataframe(insight.head(2))
 
     st.markdown("### 💪 Strengths 💪")
